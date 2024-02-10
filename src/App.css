@@ -1,0 +1,32 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Text Seletion */
+
+::-moz-selection {
+  color: white;
+  background: #0a8156;
+}
+
+::selection {
+  color: white;
+  background: #0a8156;
+}
+
+/* Scroll Bar */
+
+::-webkit-scrollbar {
+  width: 5px;
+  background: #333;
+}
+::-webkit-scrollbar-thumb {
+  background: #aaa;
+  border-radius: 0.5rem;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ccc;
+}
