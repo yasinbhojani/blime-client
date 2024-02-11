@@ -1,17 +1,16 @@
 import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 
-const Root = () => {
+const AuthRoot = () => {
 	const navigate = useNavigate();
 
+	//* verifying if user is logged-in or not
 	useEffect(() => {
 		const token = localStorage.getItem("token");
 
-		if (!token) {
-			navigate("/auth/login");
+		if (token) {
+			navigate("/");
 		}
-
-		//* write logic to verify token
 	}, [navigate]);
 
 	return (
@@ -20,4 +19,4 @@ const Root = () => {
 		</section>
 	);
 };
-export default Root;
+export default AuthRoot;
