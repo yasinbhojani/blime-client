@@ -2,16 +2,18 @@ import { useState } from "react";
 import Logo from "../../UI/Logo";
 import Input from "../../UI/Inputs/Input";
 import Button from "../../UI/Buttons/Button";
+import { handelRegister } from "../../../http/post/auth/authAPIs";
+import { useNavigate } from "react-router-dom";
 
 const SignupForm = () => {
-	//* States declaration
+	const navigate = useNavigate();
+
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLatsName] = useState();
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 
-	//* state updating functions
 	const firstNameInputChangeHandler = (e) => {
 		setFirstName(e.target.value);
 	};
@@ -25,10 +27,16 @@ const SignupForm = () => {
 		setConfirmPassword(e.target.value);
 	};
 
-	//*form submission function
-	const signupFormSubmitHandler = (e) => {
+	const signupFormSubmitHandler = async (e) => {
 		e.preventDefault();
-		//* some api request here
+		const token = await handelRegister({
+			firstName,
+			lastName,
+			email,
+			password: confirmPassword,
+		});
+		if (token) navigate("/");
+		else alert("Something went wrong");
 	};
 	return (
 		<>

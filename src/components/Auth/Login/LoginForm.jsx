@@ -1,16 +1,17 @@
 import { useState } from "react";
 
-//*components imports
 import Input from "../../UI/Inputs/Input";
 import Button from "../../UI/Buttons/Button";
 import Logo from "../../UI/Logo";
+import { handelLogin } from "../../../http/post/auth/authAPIs";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
-	//* States declaration
+	const navigate = useNavigate();
+
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 
-	//** state updating functions
 	const emailInputChangeHandler = (e) => {
 		setEmail(e.target.value);
 	};
@@ -18,10 +19,11 @@ const LoginForm = () => {
 		setPassword(e.target.value);
 	};
 
-	//*form submission function
-	const loginFormSubmitHandler = (e) => {
+	const loginFormSubmitHandler = async (e) => {
 		e.preventDefault();
-		//* some api request here
+		const token = await handelLogin({ email, password });
+		if (token) navigate("/");
+		else alert("Something went wrong");
 	};
 
 	return (
@@ -33,7 +35,6 @@ const LoginForm = () => {
 					placeholder="example@gmail.com"
 					onChange={(e) => emailInputChangeHandler(e)}
 					value={email}
-					type={"email"}
 					required
 				/>
 				<Input

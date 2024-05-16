@@ -22,7 +22,7 @@ const Router = () => {
 		},
 		//* default routes
 		{
-			path: "",
+			path: "/",
 			element: <Root />,
 			errorElement: <NotFound />,
 			children: [
