@@ -27,7 +27,6 @@ const Router = () => {
 			errorElement: <NotFound />,
 			children: [
 				{ index: true, element: <Home /> },
-				{ path: "about", element: <p>About</p> },
 			],
 		},
 	]);
