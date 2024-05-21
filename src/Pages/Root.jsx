@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
+import Example from "./Home/Nav";
 
 const Root = () => {
 	const navigate = useNavigate();
@@ -16,6 +17,7 @@ const Root = () => {
 
 	return (
 		<section>
+			<Example />
 			<Outlet />
 		</section>
 	);
