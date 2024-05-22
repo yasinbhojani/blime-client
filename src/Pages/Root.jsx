@@ -1,25 +1,26 @@
 import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import Example from "./Home/Nav";
+import Navbar from "../components/Navbar/Navbar";
+import { decodeJWT } from "../utils/utils";
 
 const Root = () => {
-	const navigate = useNavigate();
+  const navigate = useNavigate();
 
-	useEffect(() => {
-		const token = localStorage.getItem("token");
+  useEffect(() => {
+    const token = localStorage.getItem("token");
 
-		if (!token) {
-			navigate("/auth/login");
-		}
+    if (!token) {
+      navigate("/auth/login");
+    }
 
-		//* write logic to verify token
-	}, [navigate]);
+    //* write logic to verify token
+  }, []);
 
-	return (
-		<section>
-			<Example />
-			<Outlet />
-		</section>
-	);
+  return (
+    <section>
+      <Navbar />
+      <Outlet />
+    </section>
+  );
 };
 export default Root;
