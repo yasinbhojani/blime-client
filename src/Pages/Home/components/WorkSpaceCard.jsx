@@ -7,7 +7,7 @@ const WorkSpaceCard = ({ item }) => {
   return (
     <>
       <div
-        className="relative px-4 py-2 rounded-md shadow-md min-w-[240px] min-h-[120px] cursor-pointer"
+        className="relative px-4 py-2 rounded-md shadow-md min-h-[120px] cursor-pointer" //min-w-[240px]
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
       >
@@ -16,7 +16,7 @@ const WorkSpaceCard = ({ item }) => {
           style={{
             backgroundImage: `url(${item.background})`,
             backgroundColor: item.background,
-            opacity: hover ? 0.5 : 1,
+            opacity: hover ? 0.4 : 0.7,
           }}
         ></div>
         <div className="relative z-10 flex justify-between items-center">

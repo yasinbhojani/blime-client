@@ -35,8 +35,9 @@ const SignupForm = () => {
       email,
       password: confirmPassword,
     });
-    if (token) navigate("/");
-    else alert("Something went wrong");
+    if (token) {
+      navigate("/");
+    } else alert("Something went wrong");
   };
   return (
     <>

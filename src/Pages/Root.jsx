@@ -13,7 +13,12 @@ const Root = () => {
       navigate("/auth/login");
     }
 
-    //* write logic to verify token
+    const tokenData = decodeJWT();
+
+    if (!tokenData.user_details) {
+      localStorage.removeItem("token");
+      navigate("/auth/login");
+    }
   }, []);
 
   return (
