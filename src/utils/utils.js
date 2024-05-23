@@ -10,6 +10,7 @@ export const handelLogout = () => {
 export const decodeJWT = () => {
   try {
     const token = localStorage.getItem("token");
+    if (!token) return;
     const payload = token.split(".")[1];
     const decodedPayload = atob(payload);
     const userObj = JSON.parse(decodedPayload);
