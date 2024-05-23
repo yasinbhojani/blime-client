@@ -42,7 +42,7 @@ export const handelRegister = async ({
 
 	try {
 		const response = await axios.post(
-			`${apiUrl}/auth/normal-registration`,
+			`${apiUrl}/auth/register`,
 			payload
 		);
 		let token = response.data.token;
