@@ -19,15 +19,15 @@ export default function Navbar() {
               {/* <!-- Mobile menu button--> */}
               <button
                 type="button"
-                className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                className=" rounded-md p-2 border-solid bg-transparent"
                 aria-controls="mobile-menu"
                 aria-expanded="false"
                 onClick={() => setOpenMobileMenu(!openMobileMenu)}
               >
                 {openMobileMenu && (
-                  <span>
-                    <X />
-                  </span>
+                  <>
+                    <X size={21} />
+                  </>
                 )}
                 <span className="sr-only">Open main menu</span>
                 {openMobileMenu ? (
@@ -67,20 +67,20 @@ export default function Navbar() {
                 <div className="flex space-x-4">
                   <a
                     href="#"
-                    className="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
+                    className="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium no-underline"
                     aria-current="page"
                   >
                     Workspaces
                   </a>
                   <a
                     href="#"
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                    className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium no-underline"
                   >
                     Recent
                   </a>
                   <a
                     href="#"
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                    className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium no-underline"
                   >
                     Starred
                   </a>
@@ -95,7 +95,7 @@ export default function Navbar() {
                 <div>
                   <button
                     type="button"
-                    className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                    className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 border-solid"
                     id="user-menu-button"
                     aria-expanded="false"
                     aria-haspopup="true"
@@ -121,7 +121,7 @@ export default function Navbar() {
                   >
                     <a
                       href="#"
-                      className="block px-4 py-2  text-sm mx-1 rounded-md hover:bg-black"
+                      className="block px-4 py-2 text-white text-sm mx-1 rounded-md hover:bg-black no-underline"
                       role="menuitem"
                       tabIndex="-1"
                       id="user-menu-item-0"
@@ -130,7 +130,7 @@ export default function Navbar() {
                     </a>
                     <a
                       href="#"
-                      className="block px-4 py-2 text-sm mx-1 rounded-md hover:bg-black"
+                      className="block px-4 py-2 text-white text-sm mx-1 rounded-md hover:bg-black no-underline"
                       role="menuitem"
                       tabIndex="-1"
                       id="user-menu-item-1"
@@ -139,7 +139,7 @@ export default function Navbar() {
                     </a>
                     <a
                       href="#"
-                      className="block px-4 py-2 text-sm mx-1 rounded-md hover:bg-black"
+                      className="block px-4 py-2 text-white text-sm mx-1 rounded-md hover:bg-black no-underline"
                       role="menuitem"
                       tabIndex="-1"
                       id="user-menu-item-2"
@@ -158,25 +158,25 @@ export default function Navbar() {
           <div className="sm:hidden" id="mobile-menu">
             <div className="space-y-1 px-2 pb-3 pt-2">
               <a
-                href="#"
-                className="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium"
+                href="/"
+                className="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium no-underline"
                 aria-current="page"
               >
                 Workspaces
               </a>
               <a
                 href="#"
-                className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
+                className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium no-underline"
               >
                 Recent
               </a>
               <a
                 href="#"
-                className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
+                className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium no-underline"
               >
                 Starred
               </a>
-              <a className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">
+              <a className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium no-underline">
                 + Create
               </a>
             </div>

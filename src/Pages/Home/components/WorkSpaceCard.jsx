@@ -7,7 +7,7 @@ const WorkSpaceCard = ({ item }) => {
   return (
     <>
       <div
-        className="relative px-4 py-2 rounded-md shadow-md min-h-[120px] cursor-pointer" //min-w-[240px]
+        className="relative px-4 py-2 pt-0 rounded-md shadow-md min-h-[120px] cursor-pointer" //min-w-[240px]
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
       >
@@ -20,7 +20,7 @@ const WorkSpaceCard = ({ item }) => {
           }}
         ></div>
         <div className="relative z-10 flex justify-between items-center">
-          <h1 className="shadow-2xl font-bold">{item.title}</h1>
+          <h1 className="shadow-2xl font-bold my-3">{item.title}</h1>
           <div className="flex items-center gap-3">
             {item.isReadOnly && (
               <p className="text-[0.8rem] bg-primary py-[3px] px-[12px] rounded-full shadow-sm">View Only</p>

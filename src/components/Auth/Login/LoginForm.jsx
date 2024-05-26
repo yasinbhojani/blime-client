@@ -1,57 +1,53 @@
-import { useState } from "react";
-
-import Input from "../../UI/Inputs/Input";
-import Button from "../../UI/Buttons/Button";
 import Logo from "../../UI/Logo";
 import { handelLogin } from "../../../http/post/auth/authAPIs";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Form, Input, Button } from "antd";
+import { LockOutlined, UnlockOutlined } from "@ant-design/icons";
 
 const LoginForm = () => {
+  const [form] = Form.useForm();
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const emailInputChangeHandler = (e) => {
-    setEmail(e.target.value);
-  };
-  const passwordInputChangeHandler = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const loginFormSubmitHandler = async (e) => {
-    e.preventDefault();
-    const token = await handelLogin({ email, password });
-    if (token) navigate("/");
-    else alert("Something went wrong");
+  const onFinish = async (values) => {
+    setLoading(true);
+    const token = await handelLogin({
+      email: values.email,
+      password: values.password,
+    });
+    if (token) {
+      navigate("/");
+    } else alert("Something went wrong");
+    setLoading(false);
   };
 
   return (
     <>
       <Logo className="mt-4" />
-      <form className="w-80 m-auto" onSubmit={(e) => loginFormSubmitHandler(e)}>
-        <Input
-          label="Email"
-          placeholder="example@gmail.com"
-          onChange={(e) => emailInputChangeHandler(e)}
-          value={email}
-          required
-        />
-        <Input
-          label="Password"
-          variant="password"
-          onChange={(e) => passwordInputChangeHandler(e)}
-          value={password}
-          divClass={"mt-3"}
-          secondaryText="Forgot password?"
-          secondaryTextOnClick={() => console.log("Forgot password?")}
-          required
-        />
+      <Form form={form} className="w-80 m-auto" onFinish={onFinish} layout="vertical">
+        <Form.Item label="Email" name="email" rules={[{ required: true, message: "Please input your email!" }]}>
+          <Input placeholder="example@gmail.com" />
+        </Form.Item>
 
-        <Button className={"my-5 w-full"} type="submit">
-          Login
-        </Button>
-      </form>
+        <Form.Item
+          label="Password"
+          name="password"
+          rules={[{ required: true, message: "Please input your password!" }]}
+        >
+          <Input.Password
+            placeholder="Enter password"
+            iconRender={(visible) => (visible ? <UnlockOutlined /> : <LockOutlined />)}
+          />
+        </Form.Item>
+
+        <Form.Item>
+          <Button type="primary" htmlType="submit" className="mt-2 w-full" loading={loading}>
+            Login
+          </Button>
+        </Form.Item>
+      </Form>
     </>
   );
 };
