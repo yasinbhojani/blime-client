@@ -84,8 +84,8 @@ export default function Navbar() {
                   >
                     Starred
                   </a>
-                  <a className="text-white rounded-md px-3 py-2 text-sm font-medium bg-primary hover:bg-[#0a8156] border border-[#10bb8d]">
-                    Create
+                  <a className="text-white rounded-md px-3 py-2 text-sm font-medium bg-primary hover:bg-[#0a8156] border border-[#10bb8d] cursor-pointer">
+                    Create Workspaces
                   </a>
                 </div>
               </div>
@@ -177,7 +177,7 @@ export default function Navbar() {
                 Starred
               </a>
               <a className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium no-underline">
-                + Create
+                + Create Workspaces
               </a>
             </div>
           </div>
