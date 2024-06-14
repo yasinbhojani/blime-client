@@ -1,95 +1,110 @@
-import { useState } from "react";
+import React from "react";
+import { Form, Input, Button } from "antd";
+import { LockOutlined, UnlockOutlined } from "@ant-design/icons";
 import Logo from "../../UI/Logo";
-import Input from "../../UI/Inputs/Input";
-import Button from "../../UI/Buttons/Button";
 import { handelRegister } from "../../../http/post/auth/authAPIs";
 import { useNavigate } from "react-router-dom";
 
 const SignupForm = () => {
+  const [form] = Form.useForm();
   const navigate = useNavigate();
 
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLatsName] = useState();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-
-  const firstNameInputChangeHandler = (e) => {
-    setFirstName(e.target.value);
-  };
-  const lastNameInputChangeHandler = (e) => {
-    setLatsName(e.target.value);
-  };
-  const emailInputChangeHandler = (e) => {
-    setEmail(e.target.value);
-  };
-  const confirmPasswordInputChangeHandler = (e) => {
-    setConfirmPassword(e.target.value);
-  };
-
-  const signupFormSubmitHandler = async (e) => {
-    e.preventDefault();
+  const onFinish = async (values) => {
     const token = await handelRegister({
-      firstName,
-      lastName,
-      email,
-      password: confirmPassword,
+      firstName: values.firstName,
+      lastName: values.lastName,
+      email: values.email,
+      password: values.confirmPassword,
     });
     if (token) {
       navigate("/");
     } else alert("Something went wrong");
   };
+
+  const onPasswordChange = () => {
+    const password = form.getFieldValue("password");
+    const confirmPassword = form.getFieldValue("confirmPassword");
+    form.setFields([
+      {
+        name: "confirmPassword",
+        errors: password === confirmPassword ? [] : ["Password mismatched"],
+      },
+    ]);
+  };
+
   return (
     <>
       <Logo className="mt-4" />
-      <form className="w-80 m-auto" onSubmit={(e) => signupFormSubmitHandler(e)}>
-        <Input
+      <Form form={form} className="w-80 m-auto" onFinish={onFinish} layout="vertical">
+        <Form.Item
           label="First Name"
-          placeholder="John"
-          onChange={(e) => firstNameInputChangeHandler(e)}
-          value={firstName}
-          required
-          divClass={"mt-3"}
-        />
-        <Input
+          name="firstName"
+          rules={[{ required: true, message: "Please input your first name!" }]}
+        >
+          <Input placeholder="John" />
+        </Form.Item>
+
+        <Form.Item
           label="Last Name"
-          placeholder="Doe"
-          onChange={(e) => lastNameInputChangeHandler(e)}
-          value={lastName}
-          required
-          divClass={"mt-3"}
-        />
-        <Input
+          name="lastName"
+          rules={[{ required: true, message: "Please input your last name!" }]}
+        >
+          <Input placeholder="Doe" />
+        </Form.Item>
+
+        <Form.Item
           label="Email"
-          placeholder="example@gmail.com"
-          onChange={(e) => emailInputChangeHandler(e)}
-          value={email}
-          type={"email"}
-          divClass={"mt-3"}
-          required
-        />
-        <Input
+          name="email"
+          rules={[
+            { required: true, message: "Please input your email!" },
+            { type: "email", message: "The input is not valid E-mail!" },
+          ]}
+        >
+          <Input placeholder="example@gmail.com" />
+        </Form.Item>
+
+        <Form.Item
           label="Password"
-          variant="password"
-          onChange={(e) => setPassword(e.target.value)}
-          value={password}
-          divClass={"mt-3"}
-          required
-        />
-        <Input
+          name="password"
+          rules={[{ required: true, message: "Please input your password!" }]}
+        >
+          <Input.Password
+            placeholder="Enter password"
+            iconRender={(visible) => (visible ? <UnlockOutlined /> : <LockOutlined />)}
+            onChange={onPasswordChange}
+          />
+        </Form.Item>
+
+        <Form.Item
           label="Confirm Password"
-          variant="password"
-          onChange={(e) => confirmPasswordInputChangeHandler(e)}
-          value={confirmPassword}
-          divClass={"mt-3"}
-          error={password !== confirmPassword && "Password mismatched"}
-          required
-        />
-        <Button className={"my-5 w-full"} type="submit">
-          Signup
-        </Button>
-      </form>
+          name="confirmPassword"
+          dependencies={["password"]}
+          rules={[
+            { required: true, message: "Please confirm your password!" },
+            ({ getFieldValue }) => ({
+              validator(_, value) {
+                if (!value || getFieldValue("password") === value) {
+                  return Promise.resolve();
+                }
+                return Promise.reject(new Error("The two passwords that you entered do not match!"));
+              },
+            }),
+          ]}
+        >
+          <Input.Password
+            placeholder="Enter password again"
+            iconRender={(visible) => (visible ? <UnlockOutlined /> : <LockOutlined />)}
+          />
+        </Form.Item>
+
+        <Form.Item>
+          <Button type="primary" htmlType="submit" className="w-full">
+            Signup
+          </Button>
+        </Form.Item>
+      </Form>
     </>
   );
 };
+
 export default SignupForm;

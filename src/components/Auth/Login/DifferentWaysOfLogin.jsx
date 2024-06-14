@@ -74,15 +74,11 @@ const DifferentWaysOfLogin = () => {
 
   return (
     <>
-      <div className="flex justify-center items-center gap-3 w-1/2 m-auto">
+      <div className="flex justify-center items-center gap-3 lg:w-1/3 m-auto">
         <div className={lineStyle}></div>
 
         {loginMethods.map((method, index) => (
-          <button
-            className="border border-gray-500 bg-white text-[0.9rem] focus:outline-none focus:border-gray-400 rounded-full"
-            key={index}
-            onClick={method.onClick}
-          >
+          <button className="border-white border-solid rounded-full w-10 h-10" key={index} onClick={method.onClick}>
             <img className="w-9 h-9" src={method.icon} loading="lazy" alt={method.label} />
           </button>
         ))}
